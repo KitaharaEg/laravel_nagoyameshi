@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
           $request->session()->regenerate();
 
           # return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
-          return redirect()->intended(RouteServiceProvider::ADMIN_HOME)->with('flash_message', 'ログインしました。');
+          return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'ログインしました。');
       }
 
       /**

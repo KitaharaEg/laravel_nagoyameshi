@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,12 @@ use App\Http\Controllers\HomeController;
 */
 Route::group(['middleware' => 'guest:admin'], function () {
     Route::get('/',  [HomeController::class, 'index'])->name('home');
+    Route::group(['middleware' => 'auth', 'verified'], function () {
+        Route::resource('user', UserController::class)->only(['index', 'edit', 'update']);
+    });
 });
+
+
 
 require __DIR__.'/auth.php';
 
