@@ -63,4 +63,16 @@ class RestaurantController extends Controller
                                                 ));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Restaurant  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Restaurant $restaurant)
+    {
+        return view('restaurants.show', compact('restaurant'));
+    }
+
+
 }

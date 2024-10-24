@@ -18,7 +18,7 @@ use App\Http\Controllers\RestaurantController;
 */
 Route::group(['middleware' => 'guest:admin'], function () {
     Route::get('/',  [HomeController::class, 'index'])->name('home');
-    Route::resource('restaurants', RestaurantController::class)->only(['index']);
+    Route::resource('restaurants', RestaurantController::class)->only(['index','show']);
 
     Route::group(['middleware' => 'auth', 'verified'], function () {
         Route::resource('user', UserController::class)->only(['index', 'edit', 'update']);
