@@ -43,7 +43,7 @@ class RestaurantController extends Controller
                 $query->where('categories.id', $category_id);
             })->sortable($sort_query)->orderBy('created_at', 'desc')->paginate(15);
         } elseif($price) {
-            $restaurants = Restaurant::where('lowest_price', '>=', $price)
+            $restaurants = Restaurant::where('lowest_price', '<=', $price)
                                     ->sortable($sort_query)
                                     ->orderBy('created_at', 'desc')
                                     ->paginate(15);
