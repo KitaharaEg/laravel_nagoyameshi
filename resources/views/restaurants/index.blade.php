@@ -17,7 +17,6 @@
                         <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button>
                     </div>
                 </form>
-
                 <div class="card mb-3">
                     <div class="card-header">
                         カテゴリから探す
@@ -109,7 +108,7 @@
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                         @if ($restaurant->image !== '')
-                                            <img src="{{ asset('storage/restaurants/' . $restaurant->image) }}" class="card-img-top nagoyameshi-horizontal-card-image">
+                                            <img src="{{ asset('storage/restaurant/' . $restaurant->image) }}" class="card-img-top nagoyameshi-horizontal-card-image">
                                         @else
                                             <img src="{{ asset('/images/no_image.jpg') }}" class="card-img-top nagoyameshi-horizontal-card-image" alt="画像なし">
                                         @endif

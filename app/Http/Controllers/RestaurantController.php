@@ -28,7 +28,7 @@ class RestaurantController extends Controller
             $sort_query[$slices[0]] = $slices[1];
             $sorted = $request->input('select_sort');
         }
-        // 条件指定を含むデータ取得
+        // 条件指定を含むデータ取得（or検索）
         if ($keyword) {
             $restaurants = Restaurant::where('name', 'like', "%{$keyword}%")
                                     ->orWhere('address', 'like', "%{$keyword}%")
@@ -50,6 +50,32 @@ class RestaurantController extends Controller
         } else {
             $restaurants = Restaurant::sortable($sort_query)->orderBy('created_at', 'desc')->paginate(15);
         }
+        // // 条件指定を含むデータ取得（and検索）
+        // $restaurants = Restaurant::query();
+//
+        // if ($keyword) {
+        //     $restaurants->where(function($query) use ($keyword) {
+        //         $query->where('name', 'like', "%{$keyword}%")
+        //               ->orWhere('address', 'like', "%{$keyword}%")
+        //               ->orWhereHas('categories', function ($query) use ($keyword) {
+        //                   $query->where('categories.name', 'like', "%{$keyword}%");
+        //               });
+        //     });
+        // }
+        // if ($category_id) {
+        //     $restaurants->whereHas('categories', function ($query) use ($category_id) {
+        //         $query->where('categories.id', $category_id);
+        //     });
+        // }
+        // if ($price) {
+        //     $restaurants->where('lowest_price', '<=', $price);
+        // }
+        // // ページネーションとソートを適用
+        // $restaurants = $restaurants->sortable($sort_query)
+        //                         ->orderBy('created_at', 'desc')
+        //                         ->paginate(15);
+        // // ~条件指定を含むデータ取得（and検索）
+
         $categories = Category::all();
         $total = $restaurants->total();
         return view('restaurants.index', compact('keyword',
