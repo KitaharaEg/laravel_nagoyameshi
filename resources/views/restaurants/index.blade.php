@@ -17,6 +17,7 @@
                         <button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button>
                     </div>
                 </form>
+
                 <div class="card mb-3">
                     <div class="card-header">
                         カテゴリから探す
@@ -108,7 +109,7 @@
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                         @if ($restaurant->image !== '')
-                                            <img src="{{ asset('storage/restaurant/' . $restaurant->image) }}" class="card-img-top nagoyameshi-horizontal-card-image">
+                                            <img src="{{ asset('storage/restaurants/' . $restaurant->image) }}" class="card-img-top nagoyameshi-horizontal-card-image">
                                         @else
                                             <img src="{{ asset('/images/no_image.jpg') }}" class="card-img-top nagoyameshi-horizontal-card-image" alt="画像なし">
                                         @endif
@@ -132,6 +133,10 @@
                                                 @endif
                                             </div>
                                             <hr class="my-2">
+                                            <p class="mb-1">
+                                                <span class="nagoyameshi-star-rating me-1" data-rate="{{ round($restaurant->reviews->avg('score') * 2) / 2 }}"></span>
+                                                {{ number_format(round($restaurant->reviews->avg('score'), 2), 2) }}（{{ $restaurant->reviews->count() }}件）
+                                            </p>
                                             <div class="mb-1">
                                                 <span>{{ number_format($restaurant->lowest_price) }}円～{{ number_format($restaurant->highest_price) }}円</span>
                                             </div>
